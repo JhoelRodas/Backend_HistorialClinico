@@ -11,6 +11,14 @@ C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\controller\DemoController.java
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\jwt\JwtAuthenticationFilter.java
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\jwt\JwtService.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\controller\EspecialidadController.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\controller\MedicoController.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\entity\Especialidades.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\entity\Medico.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\repository\EspecialidadesRepository.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\repository\MedicoRepository.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\services\EspecialidadServices.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\services\MedicoServices.java
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionUsuarios\controller\PermisosController.java
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionUsuarios\controller\RolesController.java
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionUsuarios\controller\UsuarioController.java

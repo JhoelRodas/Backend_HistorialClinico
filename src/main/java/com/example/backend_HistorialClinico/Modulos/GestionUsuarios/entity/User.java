@@ -1,5 +1,6 @@
 package com.example.backend_HistorialClinico.Modulos.GestionUsuarios.entity;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +32,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }) })
 public class User implements UserDetails {
     @Id
@@ -37,11 +40,7 @@ public class User implements UserDetails {
     Integer id;
 
     @Column(nullable = false)
-    // String username;// correo
-    // String lastname;
-    // String firstname;
-    // String telefono;
-    // String password;
+
 
     String username;
     String ci;
@@ -73,6 +72,35 @@ public class User implements UserDetails {
         return authorities;
     }
 
+    public Roles getRol() {
+        return role;
+    }
+
+    public void setRol(Roles rol) {
+        this.role = rol;
+    }
+    
+    public String getFechaNacimiento() {
+        return fecha_nacimiento;
+    }
+    public String getApellidoMaterno() {
+        return apellido_materno;
+    }
+    public String getApellidoPaterno() {
+        return apellido_paterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellido_paterno = apellidoPaterno;
+    }
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellido_materno = apellidoMaterno;
+    }
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fecha_nacimiento = fechaNacimiento;
+    }
+
+   
     @Override
     public boolean isAccountNonExpired() {
         return true;

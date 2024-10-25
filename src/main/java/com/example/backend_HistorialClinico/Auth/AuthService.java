@@ -41,7 +41,7 @@ public class AuthService {
 
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        if (request.getIsWebAccess().equals("true") && user.getRole().getNombre().equals("CLIENTE")) {
+        if (request.getIsWebAccess().equals("true") && user.getRole().getNombre().equals("PACIENTE")) {
             throw new RuntimeException("Acceso denegado para clientes en la parte web");
         }
         String token = jwtService.getToken(user);
