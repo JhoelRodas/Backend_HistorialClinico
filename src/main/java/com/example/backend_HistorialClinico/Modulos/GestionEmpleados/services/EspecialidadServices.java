@@ -28,6 +28,7 @@ public class EspecialidadServices {
     public void eliminarEspecialidad(int id) {
         especialidadesRepository.deleteById(id);
     }
+    
     public Optional<Especialidades> obtenerEspecialidadPorId(int id) {
         return especialidadesRepository.findById(id);
     }

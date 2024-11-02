@@ -12,19 +12,24 @@ public class Departamentos {
 
     @Column(nullable = false, unique = true)
     private String nombre;
-
+    
+    @Column(nullable = false)
+    private String direccion;
     // Constructor vacío
     public Departamentos() {
     }
 
     // Constructor con todos los atributos
-    public Departamentos(String nombre) {
-        this.nombre = nombre;
-    }
+    
 
     // Getters y Setters
     public int getId() {
         return id;
+    }
+
+    public Departamentos(String nombre, String direccion) {
+        this.nombre = nombre;
+        this.direccion = direccion;
     }
 
     public String getNombre() {
@@ -33,5 +38,17 @@ public class Departamentos {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }
