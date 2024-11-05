@@ -1,11 +1,17 @@
+// Horario_medico.java
 package com.example.backend_HistorialClinico.Modulos.GestionEmpleados.entity;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "horario_medico")
 public class Horario_medico {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -30,21 +36,45 @@ public class Horario_medico {
     @JoinColumn(name = "medico_id", nullable = false)
     private Medico medico;
 
+    // Relación ManyToOne con Servicios
+    @ManyToOne
+    @JoinColumn(name = "servicio_id", nullable = false)
+    private Servicios servicio;
+
+    // Relación OneToMany con BloqueMedico
+    @OneToMany(mappedBy = "horarioMedico", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<BloqueMedico> bloques = new ArrayList<>();
+
     // Constructor vacío
     public Horario_medico() {
     }
 
-    // Constructor con todos los atributos
-    public Horario_medico(LocalDate fecha, LocalTime horaInicio, LocalTime horaFin, int cupoTotal, int cupoDisponible, Medico medico) {
+    // Constructor con todos los atributos (excepto id y bloques)
+    public Horario_medico(LocalDate fecha, LocalTime horaInicio, LocalTime horaFin, int cupoTotal, int cupoDisponible, Medico medico, Servicios servicio) {
         this.fecha = fecha;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.cupoTotal = cupoTotal;
         this.cupoDisponible = cupoDisponible;
         this.medico = medico;
+        this.servicio = servicio;
+    }
+
+    // Constructor con todos los atributos incluyendo bloques
+    public Horario_medico(LocalDate fecha, LocalTime horaInicio, LocalTime horaFin, int cupoTotal, int cupoDisponible, Medico medico, Servicios servicio, List<BloqueMedico> bloques) {
+        this.fecha = fecha;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.cupoTotal = cupoTotal;
+        this.cupoDisponible = cupoDisponible;
+        this.medico = medico;
+        this.servicio = servicio;
+        this.bloques = bloques;
     }
 
     // Getters y Setters
+
     public int getId() {
         return id;
     }
@@ -99,5 +129,33 @@ public class Horario_medico {
 
     public void setMedico(Medico medico) {
         this.medico = medico;
+    }
+
+    public Servicios getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Servicios servicio) {
+        this.servicio = servicio;
+    }
+
+    public List<BloqueMedico> getBloques() {
+        return bloques;
+    }
+
+    public void setBloques(List<BloqueMedico> bloques) {
+        this.bloques = bloques;
+    }
+
+    // Métodos auxiliares para gestionar la relación bi-direccional
+
+    public void addBloque(BloqueMedico bloque) {
+        bloques.add(bloque);
+        bloque.setHorarioMedico(this);
+    }
+
+    public void removeBloque(BloqueMedico bloque) {
+        bloques.remove(bloque);
+        bloque.setHorarioMedico(null);
     }
 }
