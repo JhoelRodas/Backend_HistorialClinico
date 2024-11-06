@@ -8,6 +8,7 @@ import com.example.backend_HistorialClinico.Modulos.GestionEmpleados.entity.Hora
 import com.example.backend_HistorialClinico.Modulos.GestionEmpleados.repository.HorarioMedicoRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -168,4 +169,7 @@ public class HorarioMedicoService {
         return horarioMedicoRepository.findByMedicoIdOrderByFechaAsc(medicoId);
     }
 
+    public List<Horario_medico> listarHorariosPorServicioYFecha(int servicioId, LocalDate fecha) {
+        return horarioMedicoRepository.findByServicioIdAndFecha(servicioId, fecha);
+    }
 }

@@ -11,6 +11,10 @@ C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\controller\DemoController.java
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\jwt\JwtAuthenticationFilter.java
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\jwt\JwtService.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\AtencionesMedicas\controller\CitaController.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\AtencionesMedicas\entity\Cita.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\AtencionesMedicas\repository\CitaRepository.java
+C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\AtencionesMedicas\services\CitaService.java
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\controller\BitacoraController.java
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\controller\DepatamentosController.java
 C:\Programas\ProyectoHistorialClinico\backend_HistorialClinico\src\main\java\com\example\backend_HistorialClinico\Modulos\GestionEmpleados\controller\EspecialidadController.java

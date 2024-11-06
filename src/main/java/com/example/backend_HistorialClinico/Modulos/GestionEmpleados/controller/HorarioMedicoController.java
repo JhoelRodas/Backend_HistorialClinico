@@ -9,6 +9,7 @@ import com.example.backend_HistorialClinico.Modulos.GestionEmpleados.entity.Medi
 import com.example.backend_HistorialClinico.Modulos.GestionEmpleados.repository.MedicoRepository;
 import com.example.backend_HistorialClinico.Modulos.GestionEmpleados.services.HorarioMedicoService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -152,4 +153,20 @@ public class HorarioMedicoController {
             return ResponseEntity.status(500).build();
         }
     }
+
+    @GetMapping("/disponibles")
+    public ResponseEntity<List<Horario_medico>> listarHorariosPorServicioYFecha(
+            @RequestParam int servicioId,
+            @RequestParam String fecha) {
+        try {
+            LocalDate localDate = LocalDate.parse(fecha); // Convierte la fecha de String a LocalDate
+            List<Horario_medico> horarios = horarioMedicoService.listarHorariosPorServicioYFecha(servicioId, localDate);
+            return ResponseEntity.ok(horarios);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
+    }
+
+
+
 }
