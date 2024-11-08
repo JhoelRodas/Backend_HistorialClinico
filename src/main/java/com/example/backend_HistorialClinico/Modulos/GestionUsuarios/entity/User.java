@@ -61,12 +61,15 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
 
-        // Añadir el rol con prefijo "ROLE_"
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getNombre()));
+        // Verifica si el role no es null antes de acceder a sus métodos
+        if (role != null) {
+            // Añadir el rol con prefijo "ROLE_"
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getNombre()));
 
-        // Añadir los permisos asociados al rol
-        for (Permisos permiso : role.getPermisos()) {
-            authorities.add(new SimpleGrantedAuthority(permiso.getNombre()));
+            // Añadir los permisos asociados al rol
+            for (Permisos permiso : role.getPermisos()) {
+                authorities.add(new SimpleGrantedAuthority(permiso.getNombre()));
+            }
         }
 
         return authorities;
