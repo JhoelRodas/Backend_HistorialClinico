@@ -1,5 +1,6 @@
 package com.example.backend_HistorialClinico.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("auth/")
 @RequiredArgsConstructor
 public class DemoController {
     
@@ -16,4 +17,8 @@ public class DemoController {
         return "Welcome form secure endpoint";
     }
     
+    @GetMapping(value = "demo")
+    public String uptime(){
+        return "Welcome form secure endpoint";
+    }
 }
