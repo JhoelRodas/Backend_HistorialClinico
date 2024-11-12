@@ -29,6 +29,7 @@ public class CitaController {
         return citaService.getCitaById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+
     }
 
     @PostMapping("/crear")
@@ -56,6 +57,7 @@ public class CitaController {
         }
     }
 
+  
     // Nuevo endpoint para cancelar una cita
     @PutMapping("/cancelar/{id}")
     public ResponseEntity<Cita> cancelarCita(@PathVariable int id) {
@@ -73,10 +75,12 @@ public class CitaController {
         return ResponseEntity.ok(citas);
     }
 
-    //obtiene las citas por el id de usuario del medico
+    // obtiene las citas por el id de usuario del medico
     @GetMapping("/medico/{userId}")
     public ResponseEntity<List<Cita>> getCitasByMedicoUserId(@PathVariable int userId) {
         List<Cita> citas = citaService.getCitasByMedicoUserId(userId);
         return ResponseEntity.ok(citas);
     }
+
+
 }

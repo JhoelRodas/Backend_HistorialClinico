@@ -10,4 +10,5 @@ import com.example.backend_HistorialClinico.Modulos.GestionUsuarios.entity.User;
 public interface CitaRepository extends JpaRepository<Cita, Integer>{
     List<Cita> findByUser(User user);
     List<Cita> findByMedico_User_Id(int userId);
+
 }

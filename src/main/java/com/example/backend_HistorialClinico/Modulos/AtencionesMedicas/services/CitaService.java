@@ -142,7 +142,6 @@ public class CitaService {
                 .orElseThrow(() -> new RuntimeException("Cita no encontrada con id " + id));
     }
     
-
     public List<Cita> getCitasByUserId(int userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id " + userId));
