@@ -24,7 +24,7 @@ public class CitaController {
         return citaService.getAllCitas();
     }
 
-    @GetMapping("/obtener/{id}")
+    @GetMapping("/obtener/{id}")  //obtener cita por id de cita
     public ResponseEntity<Cita> getCitaById(@PathVariable int id) {
         return citaService.getCitaById(id)
                 .map(ResponseEntity::ok)
@@ -69,7 +69,7 @@ public class CitaController {
         }
     }
 
-    @GetMapping("/paciente/{userId}")
+    @GetMapping("/paciente/{userId}")  //obtener todas la citas de un paciente
     public ResponseEntity<List<Cita>> getCitasByUserId(@PathVariable int userId) {
         List<Cita> citas = citaService.getCitasByUserId(userId);
         return ResponseEntity.ok(citas);
