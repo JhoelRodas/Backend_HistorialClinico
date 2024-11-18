@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "consultas")
@@ -30,6 +31,12 @@ public class Consulta {
     @OneToOne(mappedBy = "consulta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Receta receta;
+
+
+    //esto agregue para lab
+    @OneToMany(mappedBy = "consulta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrdenLaboratorio> ordenesLaboratorio;
+    //---------------------------
 
     @Column(nullable = false)
     private LocalDateTime fechaConsulta;
@@ -123,5 +130,4 @@ public class Consulta {
         this.receta = receta;
     }
 
-    
 }
