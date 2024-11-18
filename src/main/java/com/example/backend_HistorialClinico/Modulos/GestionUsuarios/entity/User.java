@@ -57,6 +57,10 @@ public class User implements UserDetails {
     @JoinColumn(name = "roles_id", nullable = false) // Llave foránea hacia Roles
     private Roles role;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "seguro_id")
+    private Seguro seguro;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
@@ -102,7 +106,13 @@ public class User implements UserDetails {
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fecha_nacimiento = fechaNacimiento;
     }
+    public Seguro getSeguro() {
+        return seguro;
+    }
 
+    public void setSeguro(Seguro seguro) {
+        this.seguro = seguro;
+    }
    
     @Override
     public boolean isAccountNonExpired() {

@@ -50,5 +50,8 @@ public class UsuarioServices {
             throw new RuntimeException("Usuario no encontrado");
         }
     }
+    public List<User> obtenerUsuariosConSeguro() {
+        return userRepository.findAllWithSeguro();
+    }
     
 }
