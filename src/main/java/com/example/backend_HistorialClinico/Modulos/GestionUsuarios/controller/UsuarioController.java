@@ -16,7 +16,8 @@ import com.example.backend_HistorialClinico.Modulos.GestionUsuarios.entity.User;
 import com.example.backend_HistorialClinico.Modulos.GestionUsuarios.services.RolesServices;
 import com.example.backend_HistorialClinico.Modulos.GestionUsuarios.services.UsuarioServices;
 import com.example.backend_HistorialClinico.Modulos.GestionUsuarios.repository.UserRepository;
-
+import com.example.backend_HistorialClinico.Modulos.GestionUsuarios.entity.Seguro;
+import com.example.backend_HistorialClinico.Modulos.GestionUsuarios.services.SeguroService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,7 +29,7 @@ public class UsuarioController {
     private final UsuarioServices usuarioServices;
     private final RolesServices rolesServices;
     private final UserRepository userRepository;
-
+    private final SeguroService seguroService;
     @GetMapping
     public ResponseEntity<List<User>> obtenerTodosLosRoles() {
         List<User> usuario = usuarioServices.obtenerTodosLosUsuario();
@@ -70,5 +71,23 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
         }
     }
+    @PutMapping("/{userId}/assignSeguro/{seguroId}")
+    public ResponseEntity<User> asignarSeguroUsuario(@PathVariable Integer userId, @PathVariable Integer seguroId) {
+        Optional<User> userOpt = usuarioServices.obtenerUsuarioPorId(userId);
+        Optional<Seguro> seguroOpt = seguroService.obtenerSeguroPorId(seguroId);
 
+        if (userOpt.isPresent() && seguroOpt.isPresent()) {
+            User user = userOpt.get();
+            user.setSeguro(seguroOpt.get()); // Asigna el seguro al usuario
+            User usuarioActualizado = usuarioServices.guardarUsuario(user);
+            return ResponseEntity.ok(usuarioActualizado);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/conSeguro")
+    public ResponseEntity<List<User>> obtenerUsuariosConSeguro() {
+        List<User> usuariosConSeguro = usuarioServices.obtenerUsuariosConSeguro();
+        return ResponseEntity.ok(usuariosConSeguro);
+    }
 }
