@@ -147,6 +147,15 @@ public class CitaService {
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id " + userId));
         return citaRepository.findByUser(user);
     }
+    @Transactional
+    public Cita actualizarEstado(int id, String nuevoEstado) {
+        return citaRepository.findById(id)
+                .map(cita -> {
+                    cita.setEstado(nuevoEstado.replaceAll("^\"|\"$", ""));
+                    return citaRepository.save(cita);
+                })
+                .orElseThrow(() -> new RuntimeException("Cita no encontrada con id " + id));
+    }
 
     public List<Cita> getCitasByMedicoUserId(int userId) {
         return citaRepository.findByMedico_User_Id(userId);
