@@ -82,5 +82,15 @@ public class CitaController {
         return ResponseEntity.ok(citas);
     }
 
+    @PatchMapping("/actualizar-estado/{id}")
+    public ResponseEntity<Cita> actualizarEstado(@PathVariable int id, @RequestBody String nuevoEstado) {
+        try {
+            Cita citaActualizada = citaService.actualizarEstado(id, nuevoEstado);
+            return ResponseEntity.ok(citaActualizada);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
