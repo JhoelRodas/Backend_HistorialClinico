@@ -34,6 +34,9 @@ public class OrdenLaboratorioController {
 
     @PostMapping
     public ResponseEntity<OrdenLaboratorio> createOrden(@RequestBody Map<String, Object> ordenData) {
+
+        
+        System.out.println(ordenData);
         int consultaId = (int) ordenData.get("consultaId");
         int analisisId = (int) ordenData.get("analisisId");
         LocalDate fechaSolicitud = LocalDate.now();

@@ -28,7 +28,7 @@ public class OrdenLaboratorio {
     // Relación ManyToOne con Consulta
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "consulta_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({"ordenesLaboratorio", "receta", "historiaClinica", "hibernateLazyInitializer", "handler"})
     private Consulta consulta;
 
     // Relación ManyToOne con AnalisisClinico

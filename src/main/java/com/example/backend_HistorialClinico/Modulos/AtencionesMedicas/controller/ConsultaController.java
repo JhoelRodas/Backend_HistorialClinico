@@ -63,7 +63,8 @@ public class ConsultaController {
      * Finalizar una consulta agregando los datos faltantes.
      */
     @PutMapping("/finalizar/{consultaId}")
-    public ResponseEntity<Consulta> finalizarConsulta(@PathVariable int consultaId,@RequestBody Map<String, String> requestData) {
+    public ResponseEntity<Consulta> finalizarConsulta(@PathVariable int consultaId,
+            @RequestBody Map<String, String> requestData) {
 
         // Extraer los datos desde el JSON del cuerpo de la solicitud
         String motivoConsulta = requestData.get("motivoConsulta");

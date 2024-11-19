@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -140,4 +141,31 @@ public class RecetaController {
         }
     }
 
+
+    @GetMapping("/usuario/{userId}")
+public ResponseEntity<List<Map<String, Object>>> getRecetasByUserId(@PathVariable Integer userId) {
+    try {
+        // Obtener todas las consultas relacionadas con el usuario
+        List<Consulta> consultas = consultaService.getConsultasByUserId(userId);
+
+        // Crear una lista de respuesta para almacenar consultas y sus recetas
+        List<Map<String, Object>> recetasConConsulta = new ArrayList<>();
+
+        for (Consulta consulta : consultas) {
+            Map<String, Object> consultaConReceta = new HashMap<>();
+            consultaConReceta.put("consulta", consulta);
+
+            // Verificar si existe receta para esta consulta
+            Optional<Receta> recetaOptional = recetaService.obtenerRecetaPorConsulta(consulta.getId());
+            consultaConReceta.put("receta", recetaOptional.orElse(null));
+
+            recetasConConsulta.add(consultaConReceta);
+        }
+
+        return ResponseEntity.ok(recetasConConsulta);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
 }

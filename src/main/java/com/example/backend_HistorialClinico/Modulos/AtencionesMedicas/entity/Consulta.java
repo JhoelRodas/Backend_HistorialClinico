@@ -1,5 +1,6 @@
 package com.example.backend_HistorialClinico.Modulos.AtencionesMedicas.entity;
 
+import com.example.backend_HistorialClinico.Modulos.GestionUsuarios.entity.HistoriaClinica;
 import com.example.backend_HistorialClinico.Modulos.GestionUsuarios.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,11 +16,16 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "historia_clinica_id", nullable = true)
+    @JsonIgnoreProperties({"consultas", "paciente", "hibernateLazyInitializer", "handler"})
+    private HistoriaClinica historiaClinica;
+
     // Relación ManyToOne con Cita (Cada consulta se refiere a una cita específica)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cita_id", nullable = false, unique = true)
     // Cada consulta está ligada a una cita única
-    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler","user" })
     private Cita cita;
 
     // Relación ManyToOne con User (Cada consulta tiene un paciente asociado)
@@ -35,6 +41,7 @@ public class Consulta {
 
     //esto agregue para lab
     @OneToMany(mappedBy = "consulta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"consulta", "analisisClinico", "hibernateLazyInitializer", "handler"})
     private List<OrdenLaboratorio> ordenesLaboratorio;
     //---------------------------
 
@@ -55,8 +62,8 @@ public class Consulta {
     }
 
     // Constructor con todos los atributos
-    public Consulta(Cita cita, User user, LocalDateTime fechaConsulta, LocalTime horaInicio, LocalTime horaFin,
-            String motivoConsulta) {
+    public Consulta(HistoriaClinica historiaClinica, Cita cita, User user, LocalDateTime fechaConsulta, LocalTime horaInicio, LocalTime horaFin, String motivoConsulta) {
+        this.historiaClinica = historiaClinica;
         this.cita = cita;
         this.user = user;
         this.fechaConsulta = fechaConsulta;
@@ -128,6 +135,15 @@ public class Consulta {
 
     public void setReceta(Receta receta) {
         this.receta = receta;
+    }
+
+
+    public HistoriaClinica getHistoriaClinica() {
+        return historiaClinica;
+    }
+
+    public void setHistoriaClinica(HistoriaClinica historiaClinica) {
+        this.historiaClinica = historiaClinica;
     }
 
 }

@@ -5,23 +5,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -60,6 +50,11 @@ public class User implements UserDetails {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "seguro_id")
     private Seguro seguro;
+
+    // Relación OneToOne con HistoriaClinica
+    @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonIgnoreProperties({"historiaClinica", "paciente", "consultas", "hibernateLazyInitializer", "handler"})
+    private HistoriaClinica historiaClinica;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -114,6 +109,14 @@ public class User implements UserDetails {
         this.seguro = seguro;
     }
    
+
+    public HistoriaClinica getHistoriaClinica() {
+        return historiaClinica;
+    }
+
+    public void setHistoriaClinica(HistoriaClinica historiaClinica) {
+        this.historiaClinica = historiaClinica;
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;
