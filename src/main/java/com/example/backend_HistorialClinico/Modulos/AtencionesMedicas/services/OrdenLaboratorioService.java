@@ -6,12 +6,15 @@ import com.example.backend_HistorialClinico.Modulos.AtencionesMedicas.entity.Ord
 import com.example.backend_HistorialClinico.Modulos.AtencionesMedicas.repository.AnalisisClinicoRepository;
 import com.example.backend_HistorialClinico.Modulos.AtencionesMedicas.repository.ConsultaRepository;
 import com.example.backend_HistorialClinico.Modulos.AtencionesMedicas.repository.OrdenLaboratorioRepository;
+import com.example.backend_HistorialClinico.Modulos.GestionUsuarios.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrdenLaboratorioService {
@@ -22,6 +25,9 @@ public class OrdenLaboratorioService {
     private ConsultaRepository consultaRepository;
     @Autowired
     private AnalisisClinicoRepository analisisClinicoRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
 
     public List<OrdenLaboratorio> getOrdenesByConsultaId(int consultaId) {
         return ordenLaboratorioRepository.findByConsultaId(consultaId);
@@ -57,5 +63,12 @@ public class OrdenLaboratorioService {
         return ordenLaboratorioRepository.findByFechaResultadoIsNull();
     }
 
+    public List<OrdenLaboratorio> getOrdenesByUsuario(int userId) {
+        return consultaRepository.findByUser(
+                userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Usuario no encontrado")))
+                .stream()
+                .flatMap(consulta -> ordenLaboratorioRepository.findByConsultaId(consulta.getId()).stream())
+                .collect(Collectors.toList());
+    }
 
 }

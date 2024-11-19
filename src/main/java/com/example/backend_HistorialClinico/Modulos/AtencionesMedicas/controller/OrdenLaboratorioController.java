@@ -35,7 +35,6 @@ public class OrdenLaboratorioController {
     @PostMapping
     public ResponseEntity<OrdenLaboratorio> createOrden(@RequestBody Map<String, Object> ordenData) {
 
-        
         System.out.println(ordenData);
         int consultaId = (int) ordenData.get("consultaId");
         int analisisId = (int) ordenData.get("analisisId");
@@ -49,4 +48,11 @@ public class OrdenLaboratorioController {
     public List<OrdenLaboratorio> getOrdenesPendientes() {
         return ordenLaboratorioService.getOrdenesPendientes();
     }
+
+    @GetMapping("/usuario/{userId}")
+    public ResponseEntity<List<OrdenLaboratorio>> getOrdenesByUsuario(@PathVariable int userId) {
+        List<OrdenLaboratorio> ordenes = ordenLaboratorioService.getOrdenesByUsuario(userId);
+        return ResponseEntity.ok(ordenes);
+    }
+
 }
